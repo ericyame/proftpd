@@ -24,9 +24,8 @@ pipeline {
         }
         stage('Coverity build'){
             steps {
-                sh 'PATH=/home/ylei/cov-analysis-linux64/bin:$PATH'
-                sh 'export PATH'
-                sh 'echo $PATH'
+                env.PATH = "/home/ylei/cov-analysis-linux64/bin:${env.PATH}"
+                sh 'echo env.PATH'
                 sh 'cov-build --dir idir make'
             }
         }
