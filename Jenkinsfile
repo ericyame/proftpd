@@ -3,8 +3,6 @@ pipeline {
     stages{
         stage('Build'){
             steps {
-                sh 'echo $PATH'
-                sh 'who'
                 sh './configure'
                 sh 'make'
             }
@@ -26,6 +24,8 @@ pipeline {
         }
         stage('Coverity build'){
             steps {
+                sh 'PATH=/home/ylei/cov-analysis-linux64/bin:$PATH'
+                sh 'export PATH'
                 sh 'echo $PATH'
                 sh 'cov-build --dir idir make'
             }
