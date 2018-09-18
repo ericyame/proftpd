@@ -3,8 +3,8 @@ pipeline {
     stages{
         stage('Build'){
             steps {
-                sh './configure'
-                sh 'make'
+                bat './configure'
+                bat 'make'
             }
             post {
                 success {
