@@ -1,8 +1,12 @@
 pipeline {
     agent any
+    environment { 
+    def COV_DIR = "/home/ylei/cov-analysis-linux64/bin"
+    }
     stages{
         stage('Build'){
             steps {
+                sh 'echo $COV_DIR'
                 sh './configure'
                 sh 'make'
             }
@@ -24,19 +28,17 @@ pipeline {
         }
         stage('Coverity build'){
             steps {
-                env.PATH = "/home/ylei/cov-analysis-linux64/bin:${env.PATH}"
-                sh 'echo env.PATH'
-                sh 'cov-build --dir idir make'
+                sh '$COV_DIR/cov-build --dir idir make'
             }
         }
         stage('Coverity analyze'){
             steps {
-                sh 'cov-analyze --dir idir --all'
+                sh '$COV_DIR/cov-analyze --dir idir --all'
             }
         }
         stage('Coverity commit'){
             steps {
-                sh 'cov-commit-defects --dir idir --host ylei-5520 --user admin --auth-key-file auth-key-admin --stream proftpd'
+                sh '$COV_DIR/cov-commit-defects --dir idir --host ylei-5520 --user admin --auth-key-file auth-key-admin --stream proftpd'
             }
         }
     }
