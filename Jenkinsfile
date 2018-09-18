@@ -24,7 +24,8 @@ pipeline {
         }
         stage('Coverity build'){
             steps {
-                sh 'cov-build --dir idir make'
+                sh 'echo $PATH'
+                sh 'cov-build'
             }
         }
         stage('Coverity analyze'){
