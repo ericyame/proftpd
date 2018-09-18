@@ -3,6 +3,8 @@ pipeline {
     stages{
         stage('Build'){
             steps {
+                sh 'echo $PATH'
+                sh 'who'
                 sh './configure'
                 sh 'make'
             }
