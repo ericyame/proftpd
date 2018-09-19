@@ -20,25 +20,44 @@ pipeline {
             steps {
                 sh 'make clean'
             }
-            post {
-                success {
-                    echo 'Analyzed by Coverity successfully!'
-                }
-            }
         }
         stage('Coverity build'){
             steps {
                 sh '$COV_DIR/cov-build --dir idir make'
+            }
+            post {
+                success {
+                    echo 'Coverity build successfully!'
+                }
+                failure {
+                    echo 'Coverity build failed!'
+                }
             }
         }
         stage('Coverity analyze'){
             steps {
                 sh '$COV_DIR/cov-analyze --dir idir --all'
             }
+            post {
+                success {
+                    echo 'Coverity analyze successfully!'
+                }
+                failure {
+                    echo 'Coverity analyze failed!'
+                }
+            }
         }
         stage('Coverity commit'){
             steps {
-                sh '$COV_DIR/cov-commit-defects --dir idir --host ylei-5520 --user admin --auth-key-file $COV_DIR/auth-key-admin --stream proftpd'
+                sh '$COV_DIR/cov-commit-defects --dir idir --host ylei-5520 --auth-key-file $COV_DIR/auth-key-admin --stream proftpd'
+            }
+            post {
+                success {
+                    echo 'Coverity commit successfully!'
+                }
+                failure {
+                    echo 'Coverity commit failed!'
+                }
             }
         }
     }
