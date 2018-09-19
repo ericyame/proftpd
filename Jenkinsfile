@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Coverity commit'){
             steps {
-                sh '$COV_DIR/cov-commit-defects --dir idir --host ylei-5520 --user admin --auth-key-file auth-key-admin --stream proftpd'
+                sh '$COV_DIR/cov-commit-defects --dir idir --host ylei-5520 --user admin --auth-key-file $COV_DIR/auth-key-admin --stream proftpd'
             }
         }
     }
