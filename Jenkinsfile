@@ -7,7 +7,7 @@ pipeline {
         stage('Black Duck Hub Detect scan'){
             steps {
                 sh '''#!/bin/bash
-                  echo "hello world" 
+                  bash <(curl -s https://blackducksoftware.github.io/hub-detect/hub-detect.sh) --blackduck.url=https://ylei-virtualbox --blackduck.api.token=NjAyYjY5ZWQtZTU5NC00ZTUzLTgxMDYtNWM4ODIwYjQ5MmNmOjYyZmNkYTQzLWRmZjItNDk3Ni04ZWZiLTI3Y2U5Yzc5YjQ2Yw== --blackduck.trust.cert=true --detect.project.name=proftpd_pipeline --detect.project.version.name=1.0 --detect.tools.excluded=POLARIS --detect.source.path=. 
                 '''
             }
             post {
