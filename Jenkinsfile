@@ -6,7 +6,7 @@ pipeline {
     stages{
         stage('Black Duck Hub Detect scan'){
             steps {
-                sh '''#!/bin/bash ...
+                sh '''#!/bin/bash
                   echo "hello world" 
                 '''
             }
