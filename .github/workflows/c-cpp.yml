@@ -17,10 +17,6 @@ jobs:
       run: ./configure
     - name: make
       run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
     - name: Synopsys Detect
       uses: blackducksoftware/github-action@2.0.1
       with:
